@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
-public class Ciphers {
+public class Main {
     // Caesarian Cipher in which the individual letters are shifted
     // forward determined by the user
     // TODO make it possible to change codewords/shift lengths and add one more cipher

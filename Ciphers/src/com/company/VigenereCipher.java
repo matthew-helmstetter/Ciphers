@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.Scanner;
-
 public class VigenereCipher {
 
     // Vigenere cipher which uses a code word to then find the
@@ -70,5 +68,4 @@ public class VigenereCipher {
         }
         return indexArray;
     }
-
 }

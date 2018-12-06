@@ -8,29 +8,29 @@ public class CeasarCipher {
     // forward determined by the user
     // TODO make it possible to change codewords/shift lengths and add one more cipher
     // TODO change all void methods to return then create test cases
-    public static String[] caesarCipher (String word, int shift) {
+    public static String[] caesarCipher (String phrase, int shift) {
+        // use mod in for cases > 26 because after only remainder is the actual shift
+        shift = shift%26;
+        if (phrase.compareTo("") == 0) {
+            return new String[]{};
+        }
+        String[] splitPhrase = phrase.split("\\s+");
+        String wordToEncode;
+        char[] phraseToCharArr;
 
-        // Determines how far to shift the letters
-//        System.out.print("Amount shift: ");
-//        int shift = Main.in.nextInt();
-
-//        Scanner in = new Scanner(System.in);
-
-//        System.out.print("Enter Phrase to Encode: ");
         // Allows for repeated use of same cipher
         while (true) {
 //            String word = in.nextLine();
             // splits phrases by spaces to be encoded individually
-            String[] split = word.split("\\s+");
-            for (int x = 0; x < split.length; x++) {
-                String wordToEncode = split[x];
+            for (int x = 0; x < splitPhrase.length; x++) {
+                wordToEncode = splitPhrase[x];
 
-                char[] temp = wordToEncode.toCharArray();
+                phraseToCharArr = wordToEncode.toCharArray();
                 // this is where the actually encoding takes places
                 // 2 case, if after the shift its greater than 'z' must wrap it around
                 // also works if the letter ends up below 'a' must then wrap again
-                for (int i = 0; i<temp.length; i++) {
-                    char letter = temp[i];
+                for (int i = 0; i<phraseToCharArr.length; i++) {
+                    char letter = phraseToCharArr[i];
                     letter = (char) (letter + shift);
 
                     if (letter > 'z') {
@@ -38,12 +38,11 @@ public class CeasarCipher {
                     } else if (letter < 'a') {
                         letter += (char) 26;
                     }
-
-                    temp[i] = letter;
+                    phraseToCharArr[i] = letter;
                 }
-                split[x] = new String(temp);
+                splitPhrase[x] = new String(phraseToCharArr);
             }
-            return split;
+            return splitPhrase;
         }
     }
 }

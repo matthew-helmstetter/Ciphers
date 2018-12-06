@@ -6,8 +6,9 @@ public class VigenereCipher {
 
     // Vigenere cipher which uses a code word to then find the
     // intersect with the inputted word on a graph of letters
-    public static void vigenereCipher(){
-//        Scanner in = new Scanner(System.in);
+    public static String[] vigenereCipher(String codeWord, String phrase){
+        int[] codeIndexArray = findIndexArrayInAlpha(codeWord.toCharArray());
+        String [] splitPhrase;
         char[][] alphaMap = {
                 {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'},
                 {'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a'},
@@ -36,20 +37,14 @@ public class VigenereCipher {
                 {'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x'},
                 {'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y'}};
 
-        System.out.print("Please enter a code word: ");
-        String codeWord = Main.in.next();
-        char[] codeWordArray = codeWord.toCharArray();
-        int[] codeIndexArray = findIndexArrayInAlpha(codeWordArray);
-        System.out.print("Enter Phrases to Encode: ");
         // TODO Make it so it repeats the code word and can word with any length of phrase
         // test more but may work now
         while (true) {
-            String word = Main.in.nextLine();
             // splits phrase on spaces
-            String[] split = word.split("\\s+");
+            splitPhrase = phrase.split("\\s+");
             // loops through every word in phrase
-            for (int x = 0; x < split.length; x++) {
-                String wordToEncode = split[x];
+            for (int x = 0; x < splitPhrase.length; x++) {
+                String wordToEncode = splitPhrase[x];
                 char[] temp = wordToEncode.toCharArray();
                 int[] indexOfCurrent = findIndexArrayInAlpha(temp);
                 // loops through every letter of each word
@@ -61,10 +56,9 @@ public class VigenereCipher {
                     char letter = alphaMap[indexOfCurrent[i]][codeIndexArray[codeIndex]];
                     temp[i] = letter;
                 }
-                String solution = new String(temp);
-                System.out.print(solution + ' ');
+                splitPhrase[x] = new String(temp);
             }
-            System.out.println();
+            return splitPhrase;
         }
     }
 

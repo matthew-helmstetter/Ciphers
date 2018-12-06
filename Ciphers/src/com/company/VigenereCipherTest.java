@@ -4,13 +4,26 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
-//TODO create actual test for all edge/weird casese
 public class VigenereCipherTest {
 
     @Test
-    public void testVigenereCipher() {
+    public void testEmptyVigenereCipher() {
+        assertArrayEquals(new String[]{}, VigenereCipher.vigenereCipher("", ""));
+        assertArrayEquals(new String[]{}, VigenereCipher.vigenereCipher("a", ""));
 
+    }
+
+    @Test
+    public void testActualCipher() {
+        assertArrayEquals(new String[]{"bda"}, VigenereCipher.vigenereCipher("bold", "app"));
+    }
+
+    @Test (expected=IllegalArgumentException.class)
+    public void testIllegalCharacters() {
+        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("?", "a"));
+        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("a", "?"));
+        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("1", "?"));
+        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("a", "2"));
     }
 
     @Test

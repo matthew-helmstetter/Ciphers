@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-//TODO create actual test for all edge/weird cases
 public class CeasarTest {
 
    @Test
@@ -25,7 +24,7 @@ public class CeasarTest {
         assertArrayEquals(new String[]{"uvwxyz"}, CeasarCipher.caesarCipher("abcdef", -500));
     }
 
-    @Test
+    @Test (expected=IllegalArgumentException.class)
     public void testSpecialCharacters() {
         assertEquals(IllegalArgumentException.class, CeasarCipher.caesarCipher("?", 1));
     }

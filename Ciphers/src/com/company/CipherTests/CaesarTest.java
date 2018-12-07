@@ -31,5 +31,13 @@ public class CaesarTest {
         assertEquals(IllegalArgumentException.class, CaesarCipher.caesarCipher("?", 1));
     }
 
+    @Test
+    public void testWithSpace() {
+        assertArrayEquals(new String[]{"b", "b"}, CaesarCipher.caesarCipher("a a", 1));
+        assertArrayEquals(new String[]{"z", "z"}, CaesarCipher.caesarCipher("a a", -1));
+
+
+    }
+
 
 }

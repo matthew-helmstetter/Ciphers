@@ -17,6 +17,8 @@ public class VigenereCipherTest {
     @Test
     public void testActualCipher() {
         assertArrayEquals(new String[]{"bda"}, VigenereCipher.vigenereCipher("bold", "app"));
+        assertArrayEquals(new String[]{"bd", "a"}, VigenereCipher.vigenereCipher("bold", "ap p"));
+
     }
 
     @Test (expected=IllegalArgumentException.class)

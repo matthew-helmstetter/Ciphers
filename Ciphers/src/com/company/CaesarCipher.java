@@ -20,31 +20,26 @@ public class CaesarCipher {
         String wordToEncode;
         char[] phraseToCharArr;
 
-        // Allows for repeated use of same cipher
-        while (true) {
-//            String word = in.nextLine();
-            // splits phrases by spaces to be encoded individually
-            for (int x = 0; x < splitPhrase.length; x++) {
-                wordToEncode = splitPhrase[x];
+        // splits phrases by spaces to be encoded individually
+        for (int x = 0; x < splitPhrase.length; x++) {
+            wordToEncode = splitPhrase[x];
+            phraseToCharArr = wordToEncode.toCharArray();
+            // 2 case, if after the shift its greater than 'z' must wrap it around
+            // also works if the letter ends up below 'a' must then wrap again
+            for (int i = 0; i<phraseToCharArr.length; i++) {
+                char letter = phraseToCharArr[i];
+                letter = (char) (letter + shift);
 
-                phraseToCharArr = wordToEncode.toCharArray();
-                // this is where the actually encoding takes places
-                // 2 case, if after the shift its greater than 'z' must wrap it around
-                // also works if the letter ends up below 'a' must then wrap again
-                for (int i = 0; i<phraseToCharArr.length; i++) {
-                    char letter = phraseToCharArr[i];
-                    letter = (char) (letter + shift);
-
-                    if (letter > 'z') {
-                        letter -= (char) 26;
-                    } else if (letter < 'a') {
-                        letter += (char) 26;
-                    }
-                    phraseToCharArr[i] = letter;
+                if (letter > 'z') {
+                    letter -= (char) 26;
+                } else if (letter < 'a') {
+                    letter += (char) 26;
                 }
-                splitPhrase[x] = new String(phraseToCharArr);
+                phraseToCharArr[i] = letter;
             }
-            return splitPhrase;
+            splitPhrase[x] = new String(phraseToCharArr);
         }
+        return splitPhrase;
+
     }
 }

@@ -22,4 +22,9 @@ public class EnigmaTest {
         Assert.assertArrayEquals(new String[]{}, Enigma.enigmaCipher("a", "a", "", "a"));
         Assert.assertArrayEquals(new String[]{}, Enigma.enigmaCipher("a", "a", "a", ""));
     }
+
+    @Test
+    public void testEnigma() {
+        Assert.assertArrayEquals(new String[]{}, Enigma.enigmaCipher("a", "a","a", "a"));
+    }
 }

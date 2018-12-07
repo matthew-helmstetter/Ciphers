@@ -21,26 +21,25 @@ public class VigenereCipher {
         String [] splitPhrase = phrase.split("\\s+");
         char[] wordToEncodeChar;
         int[] indexOfCurrent;
+        int stepCounter = 0;
 
-        while (true) {
-            // loops through every word in phrase
-            for (int x = 0; x < splitPhrase.length; x++) {
-                String wordToEncode = splitPhrase[x];
-                wordToEncodeChar = wordToEncode.toCharArray();
-                indexOfCurrent = Utils.findIndexArrayInAlpha(wordToEncodeChar);
-                // loops through every letter of each word
-                for (int i = 0; i<indexOfCurrent.length; i++) {
-                    int codeIndex = i;
-                    if (i >= codeIndexArray.length) {
-                        codeIndex = i - codeIndexArray.length;
-                    }
-                    char letter = Utils.alphaMap[indexOfCurrent[i]][codeIndexArray[codeIndex]];
-                    wordToEncodeChar[i] = letter;
+        for (int x = 0; x < splitPhrase.length; x++) {
+            String wordToEncode = splitPhrase[x];
+            wordToEncodeChar = wordToEncode.toCharArray();
+            indexOfCurrent = Utils.findIndexArrayInAlpha(wordToEncodeChar);
+            // loops through every letter of each word
+            for (int i = 0; i<indexOfCurrent.length; i++) {
+                // this allows code words of not exact length to be used
+                if (stepCounter >= codeIndexArray.length) {
+                    stepCounter = i - codeIndexArray.length;
                 }
-                splitPhrase[x] = new String(wordToEncodeChar);
+                char letter = Utils.alphaMap[indexOfCurrent[i]][codeIndexArray[stepCounter]];
+                wordToEncodeChar[i] = letter;
+                stepCounter++;
             }
-            return splitPhrase;
+            splitPhrase[x] = new String(wordToEncodeChar);
         }
+        return splitPhrase;
     }
 
 }

@@ -1,17 +1,9 @@
 package com.company;
 
-import com.company.Enigma.Enigma;
+import com.company.EnigmaPackage.Enigma;
 
 import java.util.Scanner;
 public class Main {
-    // Used for testing to print arrays of encoded words
-    private static void printArray(String[] toPrint) {
-        for (int i = 0; i < toPrint.length; i++) {
-            System.out.print(toPrint[i] + ' ');
-        }
-        System.out.println();
-    }
-
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -29,7 +21,7 @@ public class Main {
                     System.out.println("Enter Phrase to Encode: ");
                     phrase = in.nextLine();
 
-                    printArray(CaesarCipher.caesarCipher(phrase, shift));
+                    Utils.printArray(CaesarCipher.caesarCipher(phrase, shift));
                     break;
                 case "vigenere":
                     System.out.println("Enter Code Word: ");
@@ -37,7 +29,7 @@ public class Main {
 
                     System.out.println("Enter Phrase to Encode: ");
                     phrase = in.nextLine();
-                    printArray(VigenereCipher.vigenereCipher(codeWord, phrase));
+                    Utils.printArray(VigenereCipher.vigenereCipher(codeWord, phrase));
                     break;
                 case "enigma":
                     Enigma.enigmaCipher("a", "1","1","1");

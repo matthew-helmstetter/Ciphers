@@ -1,10 +1,7 @@
-package com.company.Enigma;
+package com.company.EnigmaPackage;
 
-import com.company.CaesarCipher;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class EnigmaTest {
 

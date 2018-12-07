@@ -39,4 +39,12 @@ public class Utils {
         return indexArray;
     }
 
+    // Used for testing to print arrays of encoded words
+    public static void printArray(String[] toPrint) {
+        for (int i = 0; i < toPrint.length; i++) {
+            System.out.print(toPrint[i] + ' ');
+        }
+        System.out.println();
+    }
+
 }

@@ -1,5 +1,7 @@
-package com.company;
+package com.company.CipherTests;
 
+import com.company.VigenereCipher;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,7 +10,7 @@ public class VigenereCipherTest {
 
     @Test
     public void testEmptyVigenereCipher() {
-        assertArrayEquals(new String[]{}, VigenereCipher.vigenereCipher("", ""));
+        Assert.assertArrayEquals(new String[]{}, VigenereCipher.vigenereCipher("", ""));
         assertArrayEquals(new String[]{}, VigenereCipher.vigenereCipher("a", ""));
 
     }
@@ -20,10 +22,11 @@ public class VigenereCipherTest {
 
     @Test (expected=IllegalArgumentException.class)
     public void testIllegalCharacters() {
-        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("?", "a"));
-        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("a", "?"));
-        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("1", "?"));
-        assertEquals(IllegalArgumentException.class, VigenereCipher.vigenereCipher("a", "2"));
+        VigenereCipher.vigenereCipher("?", "a");
+        VigenereCipher.vigenereCipher("a", "?");
+        VigenereCipher.vigenereCipher("1", "?");
+        VigenereCipher.vigenereCipher("a", "2");
+        VigenereCipher.vigenereCipher("1", "2");
     }
 
     @Test

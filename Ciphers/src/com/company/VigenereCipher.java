@@ -7,8 +7,8 @@ public class VigenereCipher {
     // Vigenere cipher which uses a code word to then find the
     // intersect with the inputted word on a graph of letters
     public static String[] vigenereCipher(String codeWord, String phrase){
-
-        Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+        // Testing for illegal arguments before continuing
+        Pattern p = Pattern.compile("[^a-zA-Z]");
         if (p.matcher(codeWord).find() || p.matcher(phrase).find()) {
             throw new IllegalArgumentException("A non-valid character was entered.");
         }
@@ -16,6 +16,7 @@ public class VigenereCipher {
         if (phrase.compareTo("") == 0) {
             return new String[]{};
         }
+
         int[] codeIndexArray = Utils.findIndexArrayInAlpha(codeWord.toCharArray());
         String [] splitPhrase = phrase.split("\\s+");
         char[] wordToEncodeChar;

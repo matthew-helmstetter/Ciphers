@@ -1,8 +1,8 @@
 package com.company;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.*;
+
+import com.company.Enigma.Enigma;
+
+import java.util.Scanner;
 public class Main {
     // Used for testing to print arrays of encoded words
     private static void printArray(String[] toPrint) {
@@ -28,7 +28,7 @@ public class Main {
                     System.out.println("Enter Phrase to Encode: ");
                     phrase = in.nextLine();
 
-                    printArray(CeasarCipher.caesarCipher(phrase, shift));
+                    printArray(CaesarCipher.caesarCipher(phrase, shift));
                     break;
                 case "vigenere":
                     System.out.println("Enter Code Word: ");
@@ -38,6 +38,8 @@ public class Main {
                     phrase = in.nextLine();
                     printArray(VigenereCipher.vigenereCipher(codeWord, phrase));
                     break;
+                case "enigma":
+                    Enigma.enigmaCipher("a", "1","1","1");
                 case "exit":
                     in.close();
                     System.exit(0);

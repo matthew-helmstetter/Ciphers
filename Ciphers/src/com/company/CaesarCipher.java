@@ -1,16 +1,15 @@
 package com.company;
 
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class CeasarCipher {
+public class CaesarCipher {
 
     // Caesarian Cipher in which the individual letters are shifted
     // forward determined by the user
     public static String[] caesarCipher (String phrase, int shift) {
         // use mod in for cases > 26 because after only remainder is the actual shift
         shift = shift%26;
-        Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+        Pattern p = Pattern.compile("[^a-zA-Z]");
         if (p.matcher(phrase).find()) {
             throw new IllegalArgumentException("A non-valid character was entered.");
         }

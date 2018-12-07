@@ -32,7 +32,12 @@ public class Main {
                     Utils.printArray(VigenereCipher.vigenereCipher(codeWord, phrase));
                     break;
                 case "enigma":
-                    Enigma.enigmaCipher("a", "1","1","1");
+                    System.out.println("Enter Code Word: ");
+                    codeWord = in.nextLine();
+
+                    System.out.println("Enter Phrase to Encode: ");
+                    phrase = in.nextLine();
+                    Utils.printArray(VigenereCipher.vigenereCipher(codeWord, phrase));
                 case "exit":
                     in.close();
                     System.exit(0);

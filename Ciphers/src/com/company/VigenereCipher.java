@@ -8,7 +8,7 @@ public class VigenereCipher {
     // intersect with the inputted word on a graph of letters
     public static String[] vigenereCipher(String codeWord, String phrase){
         // Testing for illegal arguments before continuing
-        Pattern p = Pattern.compile("[^a-zA-Z]");
+        Pattern p = Pattern.compile("[^a-zA-Z ]");
         if (p.matcher(codeWord).find() || p.matcher(phrase).find()) {
             throw new IllegalArgumentException("A non-valid character was entered.");
         }

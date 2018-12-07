@@ -7,8 +7,9 @@ public class Main {
     // Used for testing to print arrays of encoded words
     private static void printArray(String[] toPrint) {
         for (int i = 0; i < toPrint.length; i++) {
-            System.out.println(toPrint[i]);
+            System.out.print(toPrint[i] + ' ');
         }
+        System.out.println();
     }
 
 

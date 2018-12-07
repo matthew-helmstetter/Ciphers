@@ -7,21 +7,15 @@ import java.util.regex.Pattern;
 public class Enigma {
     public static String[] enigmaCipher (String phrase, String motor1, String motor2, String motor3) {
         // Testing for illegal arguments before continuing
-        Pattern p = Pattern.compile("[^a-zA-Z]");
-        if (p.matcher(phrase).find()) {
+        Pattern p = Pattern.compile("[^a-zA-Z ]");
+        if (p.matcher(phrase).find() || p.matcher(motor1).find() || p.matcher(motor2).find() || p.matcher(motor3).find()) {
             throw new IllegalArgumentException("A non-valid character was entered.");
         }
-        try {
-            int motor1Position = Integer.parseInt(motor1);
-            int motor2Position = Integer.parseInt(motor2);
-            int motor3Position = Integer.parseInt(motor3);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("A non-valid character was entered.");
-        }
-
-        if (phrase.compareTo("") == 0) {
+        if (phrase.isEmpty() || motor1.isEmpty() || motor2.isEmpty() || motor3.isEmpty()) {
             return new String[]{};
         }
-        return new String[]{};
+
+
+        return new String[]{"a"};
     }
 }

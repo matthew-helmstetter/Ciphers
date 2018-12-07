@@ -12,7 +12,6 @@ public class VigenereCipherTest {
     public void testEmptyVigenereCipher() {
         Assert.assertArrayEquals(new String[]{}, VigenereCipher.vigenereCipher("", ""));
         assertArrayEquals(new String[]{}, VigenereCipher.vigenereCipher("a", ""));
-
     }
 
     @Test

@@ -38,7 +38,7 @@ public class Main {
                     System.out.println("Enter Phrase to Encode: ");
                     phrase = in.nextLine();
                     Utils.printArray(Enigma.enigmaCipher(phrase, rotorPositions));
-
+                    break;
                 case "exit":
                     in.close();
                     System.exit(0);

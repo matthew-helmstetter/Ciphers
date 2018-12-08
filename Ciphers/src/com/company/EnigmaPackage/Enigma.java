@@ -2,7 +2,7 @@ package com.company.EnigmaPackage;
 
 import java.util.regex.Pattern;
 
-// This is a model of the Enigma Machine (Railway Enigma) used to encode messages
+// This is a model of the Enigma Machine (Enigma 1) used to encode messages
 // Note on the original machine wheel turns first THEN encodes, so increase step then encode
 public class Enigma {
     public static String[] enigmaCipher (String phrase, String rotorStartingPositions) {
@@ -26,10 +26,10 @@ public class Enigma {
         char[] rotorPositionsArray = rotorStartingPositions.toCharArray();
         String [] splitPhrase = phrase.split("\\s+");
 
-        // The original ran left to right and then returned so I did the same
-        EnigmaRotors.currentRightLetter = EnigmaRotors.base.indexOf(rotorPositionsArray[2]);
-        EnigmaRotors.currentMiddleLetter = EnigmaRotors.base.indexOf(rotorPositionsArray[1]);
-        EnigmaRotors.currentLeftLetter = EnigmaRotors.base.indexOf(rotorPositionsArray[0]);
+        // The original ran left to right and then looped back so I did the same
+        EnigmaRotors.currentRightLetter = EnigmaRotors.entryWheel.indexOf(rotorPositionsArray[2]);
+        EnigmaRotors.currentMiddleLetter = EnigmaRotors.entryWheel.indexOf(rotorPositionsArray[1]);
+        EnigmaRotors.currentLeftLetter = EnigmaRotors.entryWheel.indexOf(rotorPositionsArray[0]);
 
         // Splits phrase by spaces to allow for individual encoding
         for (int x = 0; x < splitPhrase.length; x++) {

@@ -1,31 +1,32 @@
 package com.company.EnigmaPackage;
 
 // Which way does it turn? lets say it just increases alphabetically
-public class EnigmaRotors {
+class EnigmaRotors {
     // These are mapped in alphabetical order
     //                               "01234567890123456789012345
     static final String base =       "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    static final String rightRotor = "JGDQOXUSCAMIFRVTPNEWKBLZYH";
+    private static final String rightRotor = "JGDQOXUSCAMIFRVTPNEWKBLZYH";
     static final int turnOverindex1 = 17;
-    public static final String turnOver1 = "N";
     static int currentRightLetter;
     //                                "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    static final String middleRotor = "NTZPSFBOKMWRCJDIVLAEYUXHGQ";
+    private static final String middleRotor = "NTZPSFBOKMWRCJDIVLAEYUXHGQ";
     static final int turnOverIndex2 = 19;
-    public static final String turnOver2 = "E";
     static int currentMiddleLetter;
     //                              "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    static final String leftRotor = "JVIUBHTCDYAKEQZPOSGXNRMWFL";
-    public static final int turnOverIndex3 = 9;
-    public static final String turnOver3 = "Y";
+    private static final String leftRotor = "JVIUBHTCDYAKEQZPOSGXNRMWFL";
+
+    // Use this later if I add ability to swap rotors
+    // public static final int turnOverIndex3 = 9;
+    // public static final String turnOver3 = "Y";
+
     static int currentLeftLetter;
     //                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    static final String reflect = "QYHOGNECVPUZTFDJAXWMKISRBL";
+    private static final String reflect = "QYHOGNECVPUZTFDJAXWMKISRBL";
 
     // Get to work one motor at a time, slowly add dont try to solve all at once
     // Decide if i want to go motor to motor or all in one step
     // TODO make it work from a set rotor position
-    public static char evalCurrentLetter(char toEncode) {
+    static char evalCurrentLetter(char toEncode) {
         // index in alphabet
         int toEncodeIndex = base.indexOf(toEncode);
         // right rotor

@@ -8,6 +8,7 @@ public class EnigmaTest {
     public void testIllegealArguments() {
         Enigma.enigmaCipher("1", "aab");
         Enigma.enigmaCipher("a", "aa");
+        Enigma.enigmaCipher("a", "");
     }
 
     @Test
@@ -15,6 +16,7 @@ public class EnigmaTest {
         Assert.assertArrayEquals(new String[]{}, Enigma.enigmaCipher("", ""));
         Assert.assertArrayEquals(new String[]{}, Enigma.enigmaCipher("", "aaa"));
         Assert.assertArrayEquals(new String[]{}, Enigma.enigmaCipher("aaa", ""));
+
     }
 
     @Test

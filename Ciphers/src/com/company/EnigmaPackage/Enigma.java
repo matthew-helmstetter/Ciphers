@@ -15,7 +15,7 @@ public class Enigma {
         if (rotorStartingPositions.length() < 3) {
             throw new IllegalArgumentException("Need three starting rotor positions.");
         }
-        if (phrase.isEmpty() || rotorStartingPositions.isEmpty()) {
+        if (phrase.isEmpty()) {
             return new String[]{};
         }
 

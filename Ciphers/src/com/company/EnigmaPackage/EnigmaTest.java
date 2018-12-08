@@ -27,5 +27,7 @@ public class EnigmaTest {
     @Test
     public void testTurnOverNextRotor() {
         Assert.assertArrayEquals(new String[]{"M"}, Enigma.enigmaCipher("a", "aaq"));
+        Assert.assertArrayEquals(new String[]{"L"}, Enigma.enigmaCipher("a", "asq"));
+
     }
 }

@@ -10,9 +10,11 @@ public class Enigma {
         // Testing for illegal arguments before continuing
         Pattern p = Pattern.compile("[^a-zA-Z ]");
         Pattern v = Pattern.compile("[^a-zA-Z]");
-
         if (p.matcher(phrase).find() || v.matcher(rotorStartingPositions).find() ) {
             throw new IllegalArgumentException("A non-valid character was entered.");
+        }
+        if (rotorStartingPositions.length() < 3) {
+            throw new IllegalArgumentException("Need three starting rotor positions.");
         }
         if (phrase.isEmpty() || rotorStartingPositions.isEmpty()) {
             return new String[]{};
@@ -25,9 +27,9 @@ public class Enigma {
         char[] rotorPositionsArray = rotorStartingPositions.toCharArray();
         String [] splitPhrase = phrase.split("\\s+");
 
-        EnigmaRotors.currentLetterOne = EnigmaRotors.base.indexOf(rotorPositionsArray[0]);
-        EnigmaRotors.currentLetterTwo = EnigmaRotors.base.indexOf(rotorPositionsArray[1]);
-        EnigmaRotors.currentLetterThree = EnigmaRotors.base.indexOf(rotorPositionsArray[2]);
+        EnigmaRotors.currentRightLetter = EnigmaRotors.base.indexOf(rotorPositionsArray[2]);
+        EnigmaRotors.currentMiddleLetter = EnigmaRotors.base.indexOf(rotorPositionsArray[1]);
+        EnigmaRotors.currentLeftLetter = EnigmaRotors.base.indexOf(rotorPositionsArray[0]);
 
         // Splits phrase by spaces to allow for individual encoding
         for (int x = 0; x < splitPhrase.length; x++) {
@@ -36,24 +38,23 @@ public class Enigma {
             // must encode letter by letter to allow it to step through
             for (int i = 0; i < wordToChar.length; i++) {
                 // Need to advance rotor 1 every call and others when it hits turnover
-                EnigmaRotors.currentLetterOne++;
-                if (EnigmaRotors.currentLetterOne == EnigmaRotors.turnOverindex1) {
-                    EnigmaRotors.currentLetterTwo++;
+                EnigmaRotors.currentRightLetter++;
+                if (EnigmaRotors.currentRightLetter == EnigmaRotors.turnOverindex1) {
+                    EnigmaRotors.currentMiddleLetter++;
                 }
-                if (EnigmaRotors.currentLetterTwo == EnigmaRotors.turnOverIndex2) {
-                    EnigmaRotors.currentLetterThree++;
+                if (EnigmaRotors.currentMiddleLetter == EnigmaRotors.turnOverIndex2) {
+                    EnigmaRotors.currentLeftLetter++;
                 }
-
                 // switch to ternary operator later
                 // String mood = inProfit() ? "happy" : "sad";
-                if (EnigmaRotors.currentLetterOne == 26){
-                    EnigmaRotors.currentLetterOne = 0;
+                if (EnigmaRotors.currentRightLetter == 26){
+                    EnigmaRotors.currentRightLetter = 0;
                 }
-                if (EnigmaRotors.currentLetterTwo == 26){
-                    EnigmaRotors.currentLetterTwo = 0;
+                if (EnigmaRotors.currentMiddleLetter == 26){
+                    EnigmaRotors.currentMiddleLetter = 0;
                 }
-                if (EnigmaRotors.currentLetterThree == 26){
-                    EnigmaRotors.currentLetterThree = 0;
+                if (EnigmaRotors.currentLeftLetter == 26){
+                    EnigmaRotors.currentLeftLetter = 0;
                 }
                 wordToChar[i] = EnigmaRotors.evalCurrentLetter(wordToChar[i]);
             }

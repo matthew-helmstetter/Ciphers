@@ -27,35 +27,31 @@ class EnigmaRotors {
 
     // Get to work one motor at a time, slowly add dont try to solve all at once
     // Decide if i want to go motor to motor or all in one step
-    // TODO Fix Bug entering wrong index
+    // TODO Fix Bug Work for negative values and wrap around
     static char evalCurrentLetter(char toEncode) {
         // index in alphabet
         // bug might be somewhere in my understanding or in the first rotor
         int toEncodeIndex = entryWheel.indexOf(toEncode);
 
-        // right rotor
-        toEncodeIndex = entryWheel.indexOf(rightRotor.charAt((toEncodeIndex + currentRightLetter)%26));
+        toEncodeIndex = entryWheel.indexOf(rightRotor.charAt((toEncodeIndex + currentRightLetter)%26)) - currentRightLetter;
 
         // middle rotor
-        toEncodeIndex = entryWheel.indexOf(middleRotor.charAt((toEncodeIndex + currentMiddleLetter)%26));
+        toEncodeIndex = entryWheel.indexOf(middleRotor.charAt((toEncodeIndex + currentMiddleLetter)%26)) - currentMiddleLetter;
 
         // left rotor
-        toEncodeIndex = entryWheel.indexOf(leftRotor.charAt((toEncodeIndex + currentLeftLetter)%26));
+        toEncodeIndex = entryWheel.indexOf(leftRotor.charAt((toEncodeIndex + currentLeftLetter)%26)) - currentLeftLetter;
 
         // reflector
         toEncodeIndex = entryWheel.indexOf(wideBReflector.charAt(toEncodeIndex));
 
-
         // left again
-        toEncodeIndex = (leftRotor.indexOf(entryWheel.charAt(toEncodeIndex ) + currentLeftLetter));
+        toEncodeIndex = leftRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentLeftLetter) % 26)) - currentLeftLetter;
 
         // middle again
-        toEncodeIndex = (middleRotor.indexOf(entryWheel.charAt(toEncodeIndex ) + currentMiddleLetter));
-//        System.out.print(toEncode);
-//        System.out.println(toEncodeIndex);
+        toEncodeIndex = middleRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentMiddleLetter) % 26)) - currentMiddleLetter;
 
         // right and final
-        toEncodeIndex = (rightRotor.indexOf(entryWheel.charAt(toEncodeIndex ) + currentRightLetter));
+        toEncodeIndex = rightRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentRightLetter) % 26)) - currentRightLetter;
 
         return  entryWheel.charAt(toEncodeIndex);
     }

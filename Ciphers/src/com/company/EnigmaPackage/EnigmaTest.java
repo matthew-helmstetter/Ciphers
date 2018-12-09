@@ -30,8 +30,8 @@ public class EnigmaTest {
 
         Assert.assertArrayEquals(new String[]{"A"}, Enigma.enigmaCipher("n", "aaz"));
 
-//        Assert.assertArrayEquals(new String[]{"RM","XSVY"}, Enigma.enigmaCipher("If this", "aaa"));
-//        Assert.assertArrayEquals(new String[]{"IF","THIS","WORK"}, Enigma.enigmaCipher("RM XSVY OMRN", "aaa"));
+        Assert.assertArrayEquals(new String[]{"LE","EYSV","TLQU","TNHFR","OQSB","IGR","CPYX","BLML","DMPCFK","BSZKJF","SOHX"}, Enigma.enigmaCipher("If this code works then the next test should decode this", "aaa"));
+        Assert.assertArrayEquals(new String[]{"IF","THIS","CODE","WORKS","THEN","THE","NEXT","TEST","SHOULD","DECODE","THIS"}, Enigma.enigmaCipher("LE EYSV TLQU TNHFR OQSB IGR CPYX BLML DMPCFK BSZKJF SOHX", "aaa"));
 
     }
 

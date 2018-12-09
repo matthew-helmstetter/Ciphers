@@ -34,24 +34,42 @@ class EnigmaRotors {
         int toEncodeIndex = entryWheel.indexOf(toEncode);
 
         toEncodeIndex = entryWheel.indexOf(rightRotor.charAt((toEncodeIndex + currentRightLetter)%26)) - currentRightLetter;
+        if (toEncodeIndex < 0) {
+            toEncodeIndex = 26 + toEncodeIndex;
+        }
 
         // middle rotor
         toEncodeIndex = entryWheel.indexOf(middleRotor.charAt((toEncodeIndex + currentMiddleLetter)%26)) - currentMiddleLetter;
+        if (toEncodeIndex < 0) {
+            toEncodeIndex = 26 + toEncodeIndex;
+        }
 
         // left rotor
         toEncodeIndex = entryWheel.indexOf(leftRotor.charAt((toEncodeIndex + currentLeftLetter)%26)) - currentLeftLetter;
+        if (toEncodeIndex < 0) {
+            toEncodeIndex = 26 + toEncodeIndex;
+        }
 
         // reflector
         toEncodeIndex = entryWheel.indexOf(wideBReflector.charAt(toEncodeIndex));
 
         // left again
         toEncodeIndex = leftRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentLeftLetter) % 26)) - currentLeftLetter;
+        if (toEncodeIndex < 0) {
+            toEncodeIndex = 26 + toEncodeIndex;
+        }
 
         // middle again
         toEncodeIndex = middleRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentMiddleLetter) % 26)) - currentMiddleLetter;
+        if (toEncodeIndex < 0) {
+            toEncodeIndex = 26 + toEncodeIndex;
+        }
 
         // right and final
         toEncodeIndex = rightRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentRightLetter) % 26)) - currentRightLetter;
+        if (toEncodeIndex < 0) {
+            toEncodeIndex = 26 + toEncodeIndex;
+        }
 
         return  entryWheel.charAt(toEncodeIndex);
     }

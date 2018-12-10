@@ -7,11 +7,11 @@ class EnigmaRotors {
     //                                       "01234567890123456789012345
     static final String entryWheel =         "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String rightRotor = "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
-    static final int turnOverindex1 = 16;
+    static final int turnOverindex1 = 17;
     static int currentRightLetter;
     //                                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String middleRotor = "AJDKSIRUXBLHWTMCQGZNPYFVOE";
-    static final int turnOverIndex2 = 4;
+    static final int turnOverIndex2 = 5;
     static int currentMiddleLetter;
     //                                      "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String leftRotor = "BDFHJLCPRTXVZNYEIWGAKMUSQO";

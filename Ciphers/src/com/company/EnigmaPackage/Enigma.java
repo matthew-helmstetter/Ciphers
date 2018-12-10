@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 // This is a model of the Enigma Machine (Enigma 1) used to encode messages
 // Note on the original machine wheel turns first THEN encodes, so increase step then encode
+// TODO Fix bug with turning over on the second rotor and the behavior
 public class Enigma {
     public static String[] enigmaCipher (String phrase, String rotorStartingPositions) {
         // Testing for illegal arguments before continuing
@@ -18,6 +19,8 @@ public class Enigma {
         if (phrase.isEmpty()) {
             return new String[]{};
         }
+
+        boolean temp = false;
 
         // Enigma code always returned in caps
         phrase = phrase.toUpperCase();
@@ -42,8 +45,10 @@ public class Enigma {
                 if (EnigmaRotors.currentRightLetter == EnigmaRotors.turnOverindex1) {
                     EnigmaRotors.currentMiddleLetter++;
                 }
+
                 if (EnigmaRotors.currentMiddleLetter == EnigmaRotors.turnOverIndex2) {
                     EnigmaRotors.currentLeftLetter++;
+                    temp = true;
                 }
                 // switch to ternary operator later
                 // String mood = inProfit() ? "happy" : "sad";
@@ -57,9 +62,17 @@ public class Enigma {
                     EnigmaRotors.currentLeftLetter = 0;
                 }
                 wordToChar[i] = EnigmaRotors.evalCurrentLetter(wordToChar[i]);
+//                if (temp) {
+//                    EnigmaRotors.currentMiddleLetter++;
+//                    temp = false;
+//                }
             }
             splitPhrase[x] = new String(wordToChar);
         }
+//        System.out.println(EnigmaRotors.currentRightLetter);
+//        System.out.println(EnigmaRotors.currentMiddleLetter);
+//        System.out.println(EnigmaRotors.currentLeftLetter);
+
         return splitPhrase;
     }
 }

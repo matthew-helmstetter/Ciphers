@@ -20,7 +20,8 @@ public class Enigma {
             return new String[]{};
         }
 
-        boolean temp = false;
+        // need to advance the rotor so it is not continuously stuck turning the next one
+        boolean turnedPrevious = false;
 
         // Enigma code always returned in caps
         phrase = phrase.toUpperCase();
@@ -41,38 +42,25 @@ public class Enigma {
             // must encode letter by letter to allow it to step through
             for (int i = 0; i < wordToChar.length; i++) {
                 // Need to advance rotor 1 every call and others when it hits turnover
-                EnigmaRotors.currentRightLetter++;
-                if (EnigmaRotors.currentRightLetter == EnigmaRotors.turnOverindex1) {
-                    EnigmaRotors.currentMiddleLetter++;
-                }
-
                 if (EnigmaRotors.currentMiddleLetter == EnigmaRotors.turnOverIndex2) {
                     EnigmaRotors.currentLeftLetter++;
-                    temp = true;
+                    turnedPrevious = true;
                 }
-                // switch to ternary operator later
-                // String mood = inProfit() ? "happy" : "sad";
-                if (EnigmaRotors.currentRightLetter == 26){
-                    EnigmaRotors.currentRightLetter = 0;
+
+                if (EnigmaRotors.currentRightLetter == EnigmaRotors.turnOverindex1 || turnedPrevious) {
+                    EnigmaRotors.currentMiddleLetter++;
+                    turnedPrevious = false;
                 }
-                if (EnigmaRotors.currentMiddleLetter == 26){
-                    EnigmaRotors.currentMiddleLetter = 0;
-                }
-                if (EnigmaRotors.currentLeftLetter == 26){
-                    EnigmaRotors.currentLeftLetter = 0;
-                }
+                EnigmaRotors.currentRightLetter++;
+
+                EnigmaRotors.currentRightLetter = (EnigmaRotors.currentRightLetter == 26) ? 0 : EnigmaRotors.currentRightLetter;
+                EnigmaRotors.currentMiddleLetter = (EnigmaRotors.currentMiddleLetter == 26) ? 0 : EnigmaRotors.currentMiddleLetter;
+                EnigmaRotors.currentLeftLetter = (EnigmaRotors.currentLeftLetter == 26) ? 0 : EnigmaRotors.currentLeftLetter;
+
                 wordToChar[i] = EnigmaRotors.evalCurrentLetter(wordToChar[i]);
-//                if (temp) {
-//                    EnigmaRotors.currentMiddleLetter++;
-//                    temp = false;
-//                }
             }
             splitPhrase[x] = new String(wordToChar);
         }
-//        System.out.println(EnigmaRotors.currentRightLetter);
-//        System.out.println(EnigmaRotors.currentMiddleLetter);
-//        System.out.println(EnigmaRotors.currentLeftLetter);
-
         return splitPhrase;
     }
 }

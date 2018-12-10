@@ -1,17 +1,16 @@
 package com.company.EnigmaPackage;
 
-// Which way does it turn? lets say it just increases alphabetically
-// TODO Change machine to Enigma 1 because keyboard changes
+// This acts as the rotors in the Enigma machine and steps through the wiring and returns the encoded letter
 class EnigmaRotors {
     // These are mapped in alphabetical order
     //                                       "01234567890123456789012345
     static final String entryWheel =         "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String rightRotor = "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
-    static final int turnOverindex1 = 17;
+    static final int turnOverindex1 = 16;
     static int currentRightLetter;
     //                                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String middleRotor = "AJDKSIRUXBLHWTMCQGZNPYFVOE";
-    static final int turnOverIndex2 = 5;
+    static final int turnOverIndex2 = 4;
     static int currentMiddleLetter;
     //                                      "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String leftRotor = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
@@ -19,7 +18,6 @@ class EnigmaRotors {
     // Use this later if I add ability to swap rotors
     // public static final int turnOverIndex3 = 21;
     // public static final String turnOver3 = "Y";
-
 
     static int currentLeftLetter;
     //                                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -30,47 +28,44 @@ class EnigmaRotors {
     // TODO Fix Bug Work for negative values and wrap around
     static char evalCurrentLetter(char toEncode) {
         // index in alphabet
-        // bug might be somewhere in my understanding or in the first rotor
         int toEncodeIndex = entryWheel.indexOf(toEncode);
 
-        toEncodeIndex = entryWheel.indexOf(rightRotor.charAt((toEncodeIndex + currentRightLetter)%26)) - currentRightLetter;
-        if (toEncodeIndex < 0) {
-            toEncodeIndex = 26 + toEncodeIndex;
-        }
+        // right rotor
+        toEncodeIndex = stepThroughRotor(toEncodeIndex, currentRightLetter, rightRotor, 0);
+        toEncodeIndex = (toEncodeIndex < 0) ? 26 + toEncodeIndex : toEncodeIndex;
 
         // middle rotor
-        toEncodeIndex = entryWheel.indexOf(middleRotor.charAt((toEncodeIndex + currentMiddleLetter)%26)) - currentMiddleLetter;
-        if (toEncodeIndex < 0) {
-            toEncodeIndex = 26 + toEncodeIndex;
-        }
+        toEncodeIndex = stepThroughRotor(toEncodeIndex, currentMiddleLetter, middleRotor, 0);
+        toEncodeIndex = (toEncodeIndex < 0) ? 26 + toEncodeIndex : toEncodeIndex;
 
         // left rotor
-        toEncodeIndex = entryWheel.indexOf(leftRotor.charAt((toEncodeIndex + currentLeftLetter)%26)) - currentLeftLetter;
-        if (toEncodeIndex < 0) {
-            toEncodeIndex = 26 + toEncodeIndex;
-        }
+        toEncodeIndex = stepThroughRotor(toEncodeIndex, currentLeftLetter, leftRotor, 0);
+        toEncodeIndex = (toEncodeIndex < 0) ? 26 + toEncodeIndex : toEncodeIndex;
 
         // reflector
-        toEncodeIndex = entryWheel.indexOf(wideBReflector.charAt(toEncodeIndex));
+        toEncodeIndex = stepThroughRotor(toEncodeIndex, 0, wideBReflector, 0);
 
+        // Start of Pass 2 going through the rotors backwards
         // left again
-        toEncodeIndex = leftRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentLeftLetter) % 26)) - currentLeftLetter;
-        if (toEncodeIndex < 0) {
-            toEncodeIndex = 26 + toEncodeIndex;
-        }
+        toEncodeIndex = stepThroughRotor(toEncodeIndex, currentLeftLetter, leftRotor, 1);
+        toEncodeIndex = (toEncodeIndex < 0) ? 26 + toEncodeIndex : toEncodeIndex;
 
         // middle again
-        toEncodeIndex = middleRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentMiddleLetter) % 26)) - currentMiddleLetter;
-        if (toEncodeIndex < 0) {
-            toEncodeIndex = 26 + toEncodeIndex;
-        }
+        toEncodeIndex = stepThroughRotor(toEncodeIndex, currentMiddleLetter, middleRotor, 1);
+        toEncodeIndex = (toEncodeIndex < 0) ? 26 + toEncodeIndex : toEncodeIndex;
 
         // right and final
-        toEncodeIndex = rightRotor.indexOf(entryWheel.charAt((toEncodeIndex + currentRightLetter) % 26)) - currentRightLetter;
-        if (toEncodeIndex < 0) {
-            toEncodeIndex = 26 + toEncodeIndex;
-        }
+        toEncodeIndex = stepThroughRotor(toEncodeIndex, currentRightLetter, rightRotor, 1);
+        toEncodeIndex = (toEncodeIndex < 0) ? 26 + toEncodeIndex : toEncodeIndex;
 
         return  entryWheel.charAt(toEncodeIndex);
+    }
+    private static int stepThroughRotor (int toEncodeIndex, int currentLetter, String rotor, int pass) {
+        if (pass == 0) {
+            toEncodeIndex = entryWheel.indexOf(rotor.charAt((toEncodeIndex + currentLetter)%26)) - currentLetter;
+        } else {
+            toEncodeIndex = rotor.indexOf(entryWheel.charAt((toEncodeIndex + currentLetter) % 26)) - currentLetter;
+        }
+        return toEncodeIndex;
     }
 }

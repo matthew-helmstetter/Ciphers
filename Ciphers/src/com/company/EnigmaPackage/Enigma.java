@@ -4,7 +4,6 @@ import java.util.regex.Pattern;
 
 // This is a model of the Enigma Machine (Enigma 1) used to encode messages
 // Note on the original machine wheel turns first THEN encodes, so increase step then encode
-// TODO Fix bug with turning over on the second rotor and the behavior
 public class Enigma {
     public static String[] enigmaCipher (String phrase, String rotorStartingPositions) {
         // Testing for illegal arguments before continuing
